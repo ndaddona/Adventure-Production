@@ -1,0 +1,30 @@
+<%= form_for(@campaign) do |f| %>
+  <%= render "shared/errors", object: @campaign %>
+  <fieldset>
+    <ul style="list-style-type:none;">
+      <li class="required">
+        <%= f.label :name %><br/>
+        <%= f.text_field :name, autofocus: true %>
+      </li>
+      <li class="required">
+        <%= f.label :description %><br/>
+        <%= f.text_area :description, cols: 40, rows: 7 %>
+      </li>
+      <li class="required">
+        <%= f.label :category %><br/>
+        <%= f.text_field :category %>
+      </li>
+      <li>
+        <%= f.label :image_file_name %><br/>
+        <%= f.text_field :image_file_name %>
+      </li>
+      <hr>
+      <p>
+      <%= hidden_field_tag :user_id, params[:user_id]%>
+      <%= f.submit %>
+      <%= link_to "Cancel", campaigns_path %>
+      </p>
+    </ul>
+    
+  </fieldset>
+<% end %>

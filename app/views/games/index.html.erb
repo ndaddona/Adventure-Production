@@ -1,0 +1,66 @@
+<div class="container">
+
+    <div class="row">
+
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+
+                <h1 class="my-4">Games for <%= link_to @campaign.name, @campaign %></h1>
+                <hr>
+
+                <!-- Blog Post -->
+                <% if @games.blank? %>
+                    <h4>There are no games containing the term <%= params[:search] %>.</h4>
+                <% end %>
+                <% @games.each do |game| %>
+                    <div class="card mb-4">
+                        <%= image_for_game(game, :size => "728x300") %>
+                        <div class="card-body">
+                            <h2 class="card-title"><%= link_to game.title, campaign_game_path(@campaign, game) %></h2>
+                            <p class="card-text"><%= truncate(game.description, length: 250, seperator: ' ') %></p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Posted on <%= time_ago_in_words(game.created_at) %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Search Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Search Games</h5>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <%= form_tag(campaign_games_path(@campaign), :method => "get", id: "search-form") do %>
+                                <%= hidden_field_tag :campaign_id, params[:campaign_id]%>
+                                <%= text_field_tag :search, params[:search], placeholder: "Search for..." %>
+                                <%= submit_tag "Search", :name => nil %>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+
+                    <% if (current_user && current_user?(@campaign.user)) || current_user_admin? %>
+                    <!-- Side Widget -->
+                    <div class="card my-4">
+                        <h5 class="card-header">Actions</h5>
+                        <div class="card-body">
+                            <%= button_to 'New Game', new_campaign_game_path(@campaign), :method => :get%>
+                        </div>
+                    </div>
+                    <% end %>
+
+                    
+            </div>
+
+        
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+      

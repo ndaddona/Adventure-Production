@@ -1,0 +1,65 @@
+
+
+<!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8"  style="padding-top: 30px">
+
+        
+      <div class="card-body">
+        
+
+        <h2 class="card-title">
+        <h1 class="mt-4"><%= @user.name %></h1>
+          Email:<%= @user.email%>
+        </h2>
+
+        <hr>
+        <p class="card-text">
+        <% if @user.campaigns.any? %>
+          Campaigns Owned:
+          <ul>
+          <% @user.campaigns.each do |campaign|%>
+              <li>
+              <%= link_to campaign.name, campaign %>
+              </li>
+          <% end %>
+          </ul>
+          <hr>
+        <% end %>
+
+        <% if @plays.any? %>
+          Campaigns Playing:
+          <ul>
+          <% @plays.each do |campaign| %>
+            <li>
+              <%= link_to campaign.name, campaign %>
+            </li>
+          <% end %>
+          </ul>
+        <% end %>
+        </p>
+        </div>
+        </div>
+      
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+          <!-- Side Widget -->
+          <% if current_user?(@user) || current_user_admin? %>
+          <div class="card my-4">
+            <h5 class="card-header">Actions</h5>
+            <div class="card-body">
+              <%= button_to "Edit", edit_user_path, :method => :get %>
+              <p><%= button_to 'Delete', @campaign, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+            </div>
+          </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+</div>

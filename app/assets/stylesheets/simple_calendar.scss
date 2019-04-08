@@ -1,0 +1,90 @@
+.simple-calendar {
+  table {
+    -webkit-border-horizontal-spacing: 0px;
+    -webkit-border-vertical-spacing: 0px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 5px solid rgb(20, 19, 19);
+    border-collapse: collapse;
+    box-sizing: border-box;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  tr {
+    border-collapse: collapse;
+  }
+
+  th {
+    padding: 6px;
+    border-bottom: 2px solid rgb(7, 6, 6);
+    border-collapse: collapse;
+    border-left: 2px solid rgb(7, 6, 6);
+    border-right: 2px solid rgb(7, 6, 6);
+    border-top: 2px none rgb(7, 6, 6);
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  td {
+    padding: 6px;
+    vertical-align: top;
+    width: 14%;
+
+    border: 1px solid #ddd;
+    border-top-color: rgb(7, 6, 6);
+    border-top-style: solid;
+    border-top-width: 4px;
+    border-right-color: rgb(7, 6, 6);
+    border-right-style: solid;
+    border-right-width: 4px;
+    border-bottom-color: rgb(7, 6, 6);
+    border-bottom-style: solid;
+    border-bottom-width: 4px;
+    border-left-color: rgb(7, 6, 6);
+    border-left-style: solid;
+    border-left-width: 4px;
+  }
+
+  .day {
+    height: 80px;
+  }
+
+  .wday-0 {
+  }
+  .wday-1 {
+  }
+  .wday-2 {
+  }
+  .wday-3 {
+  }
+  .wday-4 {
+  }
+  .wday-5 {
+  }
+  .wday-6 {
+  }
+
+  .today {
+    background: #4887cf;
+  }
+
+  .past {
+  }
+  .future {
+  }
+
+  .start-date {
+  }
+
+  .prev-month {
+    background: rgb(112, 112, 112);
+  }
+  .next-month {
+    background: rgb(112, 112, 112);
+  }
+  .current-month {
+  }
+
+  .has-events {
+  }
+}

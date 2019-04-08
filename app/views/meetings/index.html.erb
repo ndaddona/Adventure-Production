@@ -1,0 +1,41 @@
+
+
+
+<div class="row">
+      <!-- Sidebar Widgets Column -->
+      <div class="col-lg-8">
+      <h1>Calendar</h1>
+      <hr>
+      <%= month_calendar events: @meetings do |date, meetings| %>
+        <%= date.day %>
+
+        <% meetings.each do |meeting| %>
+          <div>
+            <%= link_to "#{meeting.title} - #{meeting.start_time.strftime("%I:%M %P")}", meeting %>
+          </div>
+        <% end %>
+      <% end %>
+      <br>
+      </div>
+      <div class="col-md-4">
+         <!-- Side Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Events</h5>
+          <div class="card-body">
+            <% @meetings.upcoming.limit(5).each do |meeting| %>
+              <div>
+                <%= link_to "#{meeting.title} - #{meeting.start_time.strftime("%B %d, %Y - %I:%M:%P")}", meeting %>
+              </div>
+            <% end %>
+          </div>
+        </div>  
+      </div>
+    </div>
+<hr>
+
+
+
+
+
+
+

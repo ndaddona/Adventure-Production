@@ -1,0 +1,117 @@
+
+<header class="py-5 bg-image-full" style="background-image: 
+<% if @campaign.image_file_name.blank? %>
+  url(/assets/d20.png)
+<% else %>
+  url(/assets/<%= @campaign.image_file_name%>)
+<% end %>  
+;"></header>
+
+
+<!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Title -->
+        <h1 class="mt-4"><%=@campaign.name%></h1>
+
+        <!-- Author -->
+        <p class="lead">
+          by <%= link_to @campaign.user.name, user_path(@campaign.user)%>
+        </p>
+
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead"><%=@campaign.description%></p>
+
+        <hr>
+        <h2><%= link_to pluralize(@campaign.games.size, "Game"), campaign_games_path(@campaign) %> </h2>
+        <hr>
+        <!-- Single games -->
+        <% if @campaign.games.any?%>
+            <% @campaign.games.limit(3).order(id: :desc).each do |game| %>
+                <div class="media mb-4">
+                    <div class="media-body">
+                        <h5 class="mt-0"><%= link_to game.title, campaign_game_path(@campaign, game) %></h5>
+                        <%= truncate(game.description, length: 50, seperator: ' ') %>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+         <!-- Side Widget -->
+        <% if (current_user && current_user?(@campaign.user)) || current_user_admin? %>
+          <div class="card my-4">
+            <h5 class="card-header">Actions</h5>
+            <div class="card-body">
+              <%= button_to 'New Game', new_campaign_game_path(@campaign), :method => :get%>
+              <p><%= button_to 'New Event', new_meeting_path, params: {campaign_id: @campaign.id}, :method => :get%></p>
+              <p><%= button_to "Edit", edit_campaign_path, params: {user_id: @campaign.user_id}, :method => :get%></p>
+              <p><%= button_to 'Delete', @campaign, params: {user_id: @campaign.user_id}, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header"><%= pluralize(@joined.size, 'Player') %> </h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                
+                  <% if @joined.any? %>
+                    <ul class="list-unstyled mb-0">
+                      <% @joined.each do |user| %>
+                        <li>
+                          <div>
+                            <%= link_to user.name, user %>
+                            <% if (current_user && current_user?(@campaign.user)) || current_user_admin? %>
+                              <%= button_to 'Remove', user_signup_path(user.id), params: {campaign_id: @campaign.id, user_id: user.id}, method: :delete %>
+                            <% end %>
+                          </div>
+                        </li>
+                      <% end %>
+                    </ul>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card my-4">
+          <h5 class="card-header"><%= link_to pluralize(@campaign.meetings.upcoming.size, "upcoming meeting"), meetings_path %></h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <% @campaign.meetings.upcoming.limit(3).each do |meeting| %>
+                      <div>
+                        <p><%= link_to "#{meeting.title} - #{meeting.start_time.strftime("%B %d, %Y")}", meeting %></p>
+                      </div>
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+    
+  </div>
+  <!-- /.container -->
+
+  

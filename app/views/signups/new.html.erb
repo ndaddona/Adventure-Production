@@ -1,0 +1,19 @@
+<h1>Join A Campaign </h1>
+
+<%= form_for [current_user, @signup] do |f| %>
+  <fieldset>
+    <ul style="list-style-type:none;">
+      <li class="required">
+        <%= f.label :campaigns %><br/>
+        <%= f.collection_select :campaign_id, Campaign.all, :id, :name%>
+        <%= f.hidden_field :user_id, :value => current_user.id%>
+      </li>
+      <hr>
+      <p>
+      <%= f.submit "Join"%>
+      <%= link_to "Cancel", campaigns_path %>
+      </p>
+    </ul>
+    
+  </fieldset>
+<% end %>

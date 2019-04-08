@@ -1,0 +1,26 @@
+<%= form_for @meeting do |f| %>
+  <%= render "shared/errors", object: @meeting %>
+  <fieldset>
+    <ul style="list-style-type:none;">
+      <li class="required">
+        <%= f.label :title %><br/>
+        <%= f.text_field :title, autofocus: true %>
+      </li>
+      <li class="required">
+        <%= f.label :start_time %><br/>
+        <%= f.datetime_select :start_time, :ampm => true%>
+      </li>
+      <li>
+        <%= f.label :description %><br/>
+        <%= f.text_area :description, cols: 40, rows: 7 %>
+      </li>
+      <hr>
+      <p>
+      <%= hidden_field_tag :campaign_id, params[:campaign_id]%>
+      <%= f.submit %>
+      <%= link_to "Cancel", meetings_path %>
+      </p>
+    </ul>
+    
+  </fieldset>
+<% end %>

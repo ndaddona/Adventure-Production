@@ -1,0 +1,41 @@
+ <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-8">
+        <div class="card my-4">
+          <h1 style="padding-left: 30px">Sign Up</h1>
+          <%= form_for(@user) do |f| %>
+            <%= render "shared/errors", object: @user %>
+            <fieldset>
+              <ul style="list-style-type:none;">
+                <li class="required">
+                  <%= f.label :name %><br/>
+                  <%= f.text_field :name, autofocus: true %>
+                </li>
+                <li class="required">
+                  <%= f.label :email %><br/>
+                  <%= f.text_field :email %>
+                </li>
+                <li class="required">
+                  <%= f.label :password %><br/>
+                  <%= f.password_field :password%>
+                </li>
+                <li class="required">
+                  <%= f.label :password_confirmation, "Confirm Password" %><br/>
+                  <%= f.password_field :password_confirmation%>
+                </li>
+                <hr>
+                <p>
+                <%= f.submit %>
+                <%= link_to "Cancel", users_path %>
+                </p>
+              </ul>
+              
+            </fieldset>
+          <% end %>
+        </div>
+      </div>
+    </div>
+</div>

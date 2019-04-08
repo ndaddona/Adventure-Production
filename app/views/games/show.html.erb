@@ -1,0 +1,52 @@
+<% if false %>
+
+
+<h1> Game for <%= link_to @campaign.name, @campaign %></h1>
+<h2><%= @game.title %></h2>
+<hr>
+<p>
+    <%= @game.description %>
+</p>
+<%= link_to "Edit", edit_campaign_game_path(@campaign) %>
+<%= link_to 'Delete', [@campaign, @game], class: 'button', method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+<% unless @game.image_file_name.blank?%>
+    <header class="py-5 bg-image-full" style="background-image: url(/assets/<%= @game.image_file_name%>);"></header>
+<% end %>
+
+<!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Title -->
+        <h1 class="mt-4"><%=@game.title%></h1>
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead"><%=@game.description%></p>
+
+      </div>
+
+      <div class="col-md-4">
+      <% if (current_user && current_user?(@campaign.user)) || current_user_admin? %>
+      <!-- Side Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Actions</h5>
+          <div class="card-body">
+            <%= button_to "Edit", edit_campaign_game_path(@campaign), :method => :get %>
+            <p><%= button_to 'Delete', [@campaign, @game], method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          </div>
+        </div>
+      <% end %>
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->

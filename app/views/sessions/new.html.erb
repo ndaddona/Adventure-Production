@@ -1,0 +1,31 @@
+ <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-8">
+        <div class="card my-4">
+        <h1 style="padding-left: 30px">Sign In</h1>
+
+        <%= form_tag(session_path) do %>
+          <fieldset>
+            <ul style="list-style-type:none;">
+              <li class="required">
+                <%= label_tag :email %><br>
+                <%= email_field_tag :email, nil, autofocus: true, size: 40 %>
+              </li>
+              <li class="required">
+                <%= label_tag :password %><br>
+                <%= password_field_tag :password, nil, size: 40 %>
+              </li>
+            </ul>
+            <p style="padding-left: 30px">
+              <%= submit_tag 'Sign In' %>
+              <%= link_to "Cancel", root_url%>
+            </p>
+          </fieldset>
+        <% end %>
+        </div>
+      </div>
+    </div>
+</div>
