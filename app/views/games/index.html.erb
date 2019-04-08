@@ -14,7 +14,9 @@
                 <% end %>
                 <% @games.each do |game| %>
                     <div class="card mb-4">
-                        <%= image_for_game(game, :size => "728x300") %>
+                        <% unless game.image_file_name.blank?%>
+                            <header class="py-5 bg-image-full" style="background-image: url(/assets/<%= game.image_file_name%>);"></header>
+                        <% end %>
                         <div class="card-body">
                             <h2 class="card-title"><%= link_to game.title, campaign_game_path(@campaign, game) %></h2>
                             <p class="card-text"><%= truncate(game.description, length: 250, seperator: ' ') %></p>
