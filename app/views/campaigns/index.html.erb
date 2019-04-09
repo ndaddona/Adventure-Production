@@ -20,9 +20,9 @@
         <div class="card mb-4">
             <header class="py-5 bg-image-full" style="background-image: 
               <% if campaign.image_file_name.blank? %>
-                url(d20.png)
+                url(/assets/d20.png)
               <% else %>
-                url(<%= campaign.image_file_name%>)
+                url(/assets/<%= campaign.image_file_name%>)
               <% end %>  
             ;"></header>
           <div class="card-body">
