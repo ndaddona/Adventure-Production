@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
           redirect_to(session[:intended_url] || root_url)
           session[:intended_url] = nil
         else
-          render :new
+          redirect_to new_session_path, alert: "Invalid Information"
         end
     end
 

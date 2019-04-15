@@ -26,8 +26,8 @@
               <% end %>  
             ;"></header>
           <div class="card-body">
-            <h2 class="card-title"><%= link_to campaign.name, campaign %><small><%=campaign.category%></small></h2>
-            <p class="card-text"><%= truncate(campaign.description, length: 50, seperator: ' ') %></p>
+            <h2 class="card-title"><%= link_to campaign.name, campaign %><small> [<%=campaign.category%>]</small></h2>
+            <p class="card-text"><%= truncate(campaign.description, length: 100, seperator: ' ') %></p>
           </div>
           <div class="card-footer text-muted">
             Started <%= time_ago_in_words(campaign.created_at) %> ago
