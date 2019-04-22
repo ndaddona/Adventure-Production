@@ -14,12 +14,6 @@ class ApplicationController < ActionController::Base
         current_user == user
     end
 
-    def require_admin
-        unless current_user_admin?
-            redirect_to root_url
-        end
-    end
-
 
 
     def current_user_admin?
