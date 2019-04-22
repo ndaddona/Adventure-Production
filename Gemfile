@@ -76,3 +76,5 @@ gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.3.1'
 gem "simple_calendar", "~> 2.0"
+
+gem 'simplecov', require: false, group: :test

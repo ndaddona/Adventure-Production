@@ -38,7 +38,7 @@ describe 'Viewing the event' do
     campaign = Campaign.create!(campaign_attributes(user: user))
     meeting = Meeting.create!(title: "Test", start_time: "2019-03-03 10:40:00", description: 'yup', campaign: campaign)
     sign_in(user2)
-    visit meeting_path(campaign)
+    visit meeting_path(meeting)
 
     expect(page).to have_text(campaign.name)
     expect(page).to have_text(meeting.title)

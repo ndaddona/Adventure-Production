@@ -1,7 +1,11 @@
 class CampaignsController < ApplicationController
 
-  before_action :set_user, except: [:index, :show]
-  before_action :require_correct_or_admin, except: [:index, :show]
+  before_action :require_signin, except: [:index, :show]
+  before_action :set_user, only: [:new, :create]
+  before_action :set_campaign, except: [:index, :new, :create]
+  before_action :require_correct_or_admin, only: [:edit, :update, :destroy]
+  
+  
 
   def index
     case params[:scope]
@@ -34,7 +38,6 @@ class CampaignsController < ApplicationController
   end
 
   def show
-    @campaign = Campaign.find(params[:id])
     @joined = @campaign.joined
   end
 
@@ -52,11 +55,9 @@ class CampaignsController < ApplicationController
   end
 
   def edit
-    @campaign = @user.campaigns.find(params[:id])
   end
 
   def update
-    @campaign = @user.campaigns.find(params[:id])
     if @campaign.update(campaign_params)
       redirect_to @campaign, notice: "Campaign successfully updated!"
     else
@@ -65,7 +66,6 @@ class CampaignsController < ApplicationController
   end
 
   def destroy
-    @campaign = Campaign.find(params[:id])
     @campaign.destroy
     redirect_to campaigns_url, alert: "Campaign deleted"
   end
@@ -80,10 +80,16 @@ class CampaignsController < ApplicationController
     @user = User.find(params[:user_id])
   end
 
+  def set_campaign
+    @campaign = Campaign.find(params[:id])
+  end
+
   def require_correct_or_admin
-    unless current_user?(@user) || current_user.admin?
+    unless current_user?(@campaign.user) || current_user.admin?
       redirect_to root_url
     end
   end
+
+  
 
 end

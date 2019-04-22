@@ -54,11 +54,9 @@ class UsersController < ApplicationController
     end
 
     def require_correct_or_admin
-        @user = User.find(params[:id])
-        unless current_user?(@user) || current_user.admin?
+        unless current_user?(User.find(params[:id])) || current_user.admin?
           redirect_to root_url
         end
     end
-
 
 end

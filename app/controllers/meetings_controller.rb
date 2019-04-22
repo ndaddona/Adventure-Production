@@ -1,5 +1,6 @@
 class MeetingsController < ApplicationController
 
+before_action :require_signin, except: [:index, :show]
 before_action :set_campaign, except: [:index, :show]
 before_action :require_correct_or_admin, except: [:index, :show]
 
@@ -54,9 +55,9 @@ before_action :require_correct_or_admin, except: [:index, :show]
     end
 
     def require_correct_or_admin
-        @user = @campaign.user
-        unless current_user?(@user) || current_user.admin?
+        unless current_user?(@campaign.user) || current_user.admin?
           redirect_to root_url
         end
     end
+
 end

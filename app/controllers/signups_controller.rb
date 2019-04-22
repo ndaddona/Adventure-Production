@@ -1,16 +1,15 @@
 class SignupsController < ApplicationController
 
+    before_action :require_signin
+    
     def new
         @signup = Signup.new  
     end
 
     def create
         @signup = Signup.new(signup_params)
-        if @signup.save
-            redirect_to current_user, notice: "Campaign joined!"
-        else
-            render :new
-        end
+        @signup.save
+        redirect_to current_user, notice: "Campaign joined!"
     end
 
     def destroy

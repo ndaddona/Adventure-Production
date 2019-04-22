@@ -50,4 +50,18 @@ describe "Creating a new campaign." do
 
 
     end
+
+    it "does not save the campaign if it's invalid" do
+        user = User.create!(user_attributes)
+        sign_in(user)
+        visit root_url
+        click_button 'New Campaign'
+        
+        expect { 
+          click_button 'Create Campaign' 
+        }.not_to change(Campaign, :count)
+ 
+        expect(current_path).to eq(campaigns_path)
+        expect(page).to have_text('Description can\'t be blank')
+      end
 end

@@ -22,7 +22,7 @@ describe "Signing in" do
 
     click_button 'Sign In'
 
-    expect(current_path).to eq(users_path)   
+    expect(current_path).to eq(root_path)   
 
   end
 
@@ -50,6 +50,6 @@ describe "Signing in" do
 
     sign_in(user)
 
-    expect(current_path).to eq(users_path)
+    expect(current_path).to eq(root_path)
   end
 end

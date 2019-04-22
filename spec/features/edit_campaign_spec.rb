@@ -49,6 +49,7 @@ describe "Edit a campaign." do
 
         click_button 'Update Campaign'
 
+        expect(current_path).to eq(campaign_path(campaign))
 
         expect(page).to have_text('Description can\'t be blank')
 

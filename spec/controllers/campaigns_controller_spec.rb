@@ -1,18 +1,19 @@
 require 'rails_helper'
 
-describe UsersController do
+describe CampaignsController do
 
   before do
-    @user = User.create!(user_attributes)
+    user = User.create!(user_attributes)
+    @campaign = Campaign.create!(campaign_attributes(user: user))
   end
 
   context "when not signed in" do
-    it "cannot access user list" do
-      get :index
+    it "cannot reach new campaign page" do
+      get :new
       expect(response).to redirect_to(new_session_path)
     end
-    it "cannot access user page" do
-      get :show, params: {id: @user.id}
+    it "cannot create new campaign" do
+      post :create
       expect(response).to redirect_to(new_session_path)
     end
   end
@@ -24,20 +25,21 @@ describe UsersController do
       session[:user_id] = @non_admin.id
     end
 
-    it "cannot access other user update" do
-      get :edit, params: { id: @user}
+
+    it "cannot access edit" do
+      get :edit, params: { id: @campaign, user_id: @campaign.user.id}
 
       expect(response).to redirect_to(root_url)
     end
 
-    it "cannot access other user update" do
-      patch :update, params: { id: @user}
+    it "cannot access update" do
+      patch :update, params: { id: @campaign, user_id: @campaign.user.id}
 
       expect(response).to redirect_to(root_url)
     end
 
-    it "cannot access other user destroy" do
-      delete :destroy, params: { id: @user}
+    it "cannot access destroy" do
+      delete :destroy, params: { id: @campaign, user_id: @campaign.user.id}
 
       expect(response).to redirect_to(root_url)
     end

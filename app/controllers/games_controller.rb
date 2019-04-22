@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
+    
     before_action :set_campaign
+    before_action :require_signin, except: [:index, :show]
     before_action :require_correct_or_admin, except: [:index, :show]
 
     def index
@@ -43,7 +45,7 @@ class GamesController < ApplicationController
     def destroy
         @game = @campaign.games.find(params[:id])
         @game.destroy
-        redirect_to campaign_games_path
+        redirect_to @campaign
     end
 
     private
@@ -57,10 +59,10 @@ class GamesController < ApplicationController
     end
 
     def require_correct_or_admin
-        @user = @campaign.user
-        unless current_user?(@user) || current_user.admin?
+        unless current_user?(@campaign.user) || current_user.admin?
           redirect_to root_url
         end
     end
+
 
 end
