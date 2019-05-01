@@ -11,7 +11,7 @@
 <%= link_to 'Delete', [@campaign, @game], class: 'button', method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
 
-<% unless @game.image_file_name.blank?%>
+<% if @game.image_file_name?%>
     <header class="py-5 bg-image-full" style="background-image: url(/assets/<%= @game.image_file_name%>);"></header>
 <% end %>
 

@@ -1,5 +1,5 @@
-<%= form_for [@campaign, @game] do |f| %>
-  <%= render "shared/errors", object: @game %>
+<%= form_for [campaign, game] do |f| %>
+  <%= render "shared/errors", object: game %>
   <fieldset>
   <ul style="list-style-type:none;">
       <li class="required">
@@ -17,7 +17,7 @@
     <hr>
     <p>
       <%= f.submit %>
-      <%= link_to "Cancel", @campaign %>
+      <%= link_to "Cancel", campaign %>
     </p>
   </ul>
   </fieldset>

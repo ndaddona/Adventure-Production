@@ -20,15 +20,22 @@
       <div class="col-md-4">
          <!-- Side Widget -->
         <div class="card my-4">
-          <h5 class="card-header">Events</h5>
+          <h5 class="card-header">Upcoming Events</h5>
           <div class="card-body">
-            <% @meetings.upcoming.limit(5).each do |meeting| %>
-              <div>
-                <%= link_to "#{meeting.title} - #{meeting.start_time.strftime("%B %d, %Y - %I:%M:%P")}", meeting %>
-              </div>
-            <% end %>
+              <% @meetings.upcoming.limit(5).each do |meeting| %>
+                <div>
+                  <%= link_to "#{meeting.title} - #{meeting.start_time.strftime("%B %d, %Y - %I:%M:%P")}", meeting %>
+                </div>
+              <% end %>
           </div>
-        </div>  
+        </div>
+        <div class="card my-4">
+          <h5 class="card-header">Filters</h5>
+          <div class="card-body">
+              <%= button_to 'All Events', meetings_path, :method => :get %>
+              <p><%= button_to 'Your Events', filtered_meetings_path(:your_meetings), :method => :get %></p>
+          </div>
+        </div>
       </div>
     </div>
 <hr>

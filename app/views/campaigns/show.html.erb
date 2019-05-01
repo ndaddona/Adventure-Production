@@ -1,10 +1,10 @@
 
-<header class="py-5 bg-image-full" style="background-image: 
-<% if @campaign.image_file_name.blank? %>
-  url(/assets/d20.png)
-<% else %>
+<header class="py-5 bg-image-full" style="background-image:
+<% if @campaign.image_file_name? %>
   url(/assets/<%= @campaign.image_file_name%>)
-<% end %>  
+<% else %>
+  url(/assets/d20.png)
+<% end %>
 ;"></header>
 
 
@@ -21,7 +21,7 @@
 
         <!-- Author -->
         <p class="lead">
-          by <%= link_to @campaign.user.name, user_path(@campaign.user)%>
+          by <%= link_to @campaign.user_name, user_path(@campaign.user)%>
         </p>
 
         <hr>
@@ -67,7 +67,6 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-6">
-                
                   <% if @joined.any? %>
                     <ul class="list-unstyled mb-0">
                       <% @joined.each do |user| %>
@@ -104,14 +103,8 @@
             </div>
           </div>
         </div>
-
-
       </div>
-
     </div>
     <!-- /.row -->
-    
   </div>
   <!-- /.container -->
-
-  

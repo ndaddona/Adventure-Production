@@ -7,44 +7,39 @@
 
       <!-- Post Content Column -->
       <div class="col-lg-8"  style="padding-top: 30px">
+        <div class="card-body">
+          <h2 class="card-title">
+          <h1 class="mt-4"><%= @user.name %></h1>
+            Email:<%= @user.email%>
+          </h2>
 
-        
-      <div class="card-body">
-        
-
-        <h2 class="card-title">
-        <h1 class="mt-4"><%= @user.name %></h1>
-          Email:<%= @user.email%>
-        </h2>
-
-        <hr>
-        <p class="card-text">
-        <% if @user.campaigns.any? %>
-          Campaigns Owned:
-          <ul>
-          <% @user.campaigns.each do |campaign|%>
-              <li>
-              <%= link_to campaign.name, campaign %>
-              </li>
-          <% end %>
-          </ul>
           <hr>
-        <% end %>
-
-        <% if @plays.any? %>
-          Campaigns Playing:
-          <ul>
-          <% @plays.each do |campaign| %>
-            <li>
-              <%= link_to campaign.name, campaign %>
-            </li>
+          <p class="card-text">
+          <% if @user.campaigns.any? %>
+            Campaigns Owned:
+            <ul>
+            <% @user.campaigns.each do |campaign|%>
+                <li>
+                <%= link_to campaign.name, campaign %>
+                </li>
+            <% end %>
+            </ul>
+            <hr>
           <% end %>
-          </ul>
-        <% end %>
-        </p>
+
+          <% if @plays.any? %>
+            Campaigns Playing:
+            <ul>
+            <% @plays.each do |campaign| %>
+              <li>
+                <%= link_to campaign.name, campaign %>
+              </li>
+            <% end %>
+            </ul>
+          <% end %>
+          </p>
+          </div>
         </div>
-        </div>
-      
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
 

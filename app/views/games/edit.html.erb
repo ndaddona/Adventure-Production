@@ -3,7 +3,7 @@
       <div class="col-md-8">
         <h1>Edit <%=link_to @game.title, campaign_game_path(@campaign) %></h1>
 
-        <%= render 'form' %>
+        <%= render 'form', :game=> @game, :campaign=> @campaign %>
       </div>
     </div>
 </div>

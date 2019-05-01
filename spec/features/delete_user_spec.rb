@@ -5,13 +5,11 @@ describe 'Delete users' do
     user = User.create!(user_attributes)
     sign_in(user)
     visit user_path(user)
-    
-    expect { 
-      click_button 'Delete' 
-    }.to change(User, :count)
-    expect(current_path).to eq(root_path)
-    expect(page).to have_text("User deleted!")
-  end
-  
 
+    expect do
+      click_button 'Delete'
+    end.to change(User, :count)
+    expect(page).to have_current_path(root_path)
+    expect(page).to have_text('User deleted!')
+  end
 end

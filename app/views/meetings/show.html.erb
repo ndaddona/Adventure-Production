@@ -8,7 +8,7 @@
       <!-- Post Content Column -->
       <div class="col-lg-8">
 
-        <h1 class="mt-4">Event for <%= link_to @meeting.campaign.name, @meeting.campaign%>: <%=@meeting.title%></h1> 
+        <h1 class="mt-4">Event for <%= link_to @meeting.campaign_name, @meeting.campaign%>: <%=@meeting.title%></h1>
 
         <hr>
         <p class="lead">
@@ -18,12 +18,10 @@
         <p class="lead">
           on <%=@meeting.start_time.strftime("%B %d, %Y at %I:%M%P")%>
         </p>
-        
       </div>
 
       <!-- Sidebar Widgets Column -->
       <div class="col-md-4">
-  
         <% if (current_user && current_user?(@meeting.campaign.user)) || current_user_admin? %>
          <!-- Side Widget -->
         <div class="card my-4">
@@ -37,9 +35,7 @@
 
 
       </div>
-
     </div>
     <!-- /.row -->
-    
   </div>
   <!-- /.container -->

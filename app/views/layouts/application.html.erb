@@ -22,7 +22,6 @@
           <ul>
             <li class="nav-link active">
               <% if current_user %>
-                 
                 <%= link_to current_user do %>
                   <i class="fas fa-dungeon", style="color:#FFFFFF;"> <%=current_user.name%></i>
                 <% end %><br>
@@ -32,6 +31,9 @@
                 <%= link_to users_path do %>
                   <i class="fas fa-dungeon", style="color:#FFFFFF;"> Users</i>
                 <% end %><br>
+                <%= link_to meetings_path do %>
+                  <i class="fas fa-dungeon", style="color:#FFFFFF;"> Calendar</i>
+                <% end %>
               <% else %>
                 <%= link_to new_user_path do %>
                   <i class="fas fa-dungeon", style="color:#FFFFFF;"> Sign Up</i>
@@ -39,9 +41,6 @@
                 <%= link_to new_session_path do %>
                   <i class="fas fa-dungeon", style="color:#FFFFFF;"> Sign In</i>
                 <% end %><br>
-              <% end %>
-              <%= link_to meetings_path do %>
-                  <i class="fas fa-dungeon", style="color:#FFFFFF;"> Calendar</i>
               <% end %>
             </li>
           </ul>
@@ -61,8 +60,7 @@
   </head>
 
   <body style="padding-top: 200px;">
-    
-    
+
     <%= yield %>
   </body>
 
@@ -74,5 +72,4 @@
       <!-- /.container -->
     </footer>
 
-  
 </html>

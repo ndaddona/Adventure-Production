@@ -10,11 +10,11 @@
 
                 <!-- Blog Post -->
                 <% if @games.blank? %>
-                    <h4>There are no games containing the term <%= params[:search] %>.</h4>
+                    <h4>There are no games found<%= params[:search] %>.</h4>
                 <% end %>
                 <% @games.each do |game| %>
                     <div class="card mb-4">
-                        <% unless game.image_file_name.blank?%>
+                        <% if game.image_file_name?%>
                             <header class="py-5 bg-image-full" style="background-image: url(/assets/<%= game.image_file_name%>);"></header>
                         <% end %>
                         <div class="card-body">
@@ -22,7 +22,7 @@
                             <p class="card-text"><%= truncate(game.description, length: 250, seperator: ' ') %></p>
                         </div>
                         <div class="card-footer text-muted">
-                            Posted on <%= time_ago_in_words(game.created_at) %>
+                            Posted on <%= game.created_at.strftime("%B %d, %Y")%>
                         </div>
                     </div>
                 <% end %>
@@ -54,15 +54,10 @@
                         </div>
                     </div>
                     <% end %>
-
-                    
             </div>
-
-        
     </div>
     <!-- /.row -->
-
-  </div>
-  <!-- /.container -->
+</div>
+<!-- /.container -->
 
       

@@ -3,7 +3,7 @@
       <div class="col-md-8">
         <h1>New <%=link_to @campaign.name, @campaign %> game</h1>
         <hr>
-        <%= render 'form' %>
+        <%= render 'form', :game=> @game, :campaign=> @campaign %>
       </div>
     </div>
 </div>

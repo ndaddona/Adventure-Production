@@ -1,64 +1,60 @@
 require 'rails_helper'
 
-describe "Creating a new calendar event." do
-    it 'Goes to new event page' do
-        user = User.create!(user_attributes)
-        campaign = Campaign.create!(campaign_attributes(user: user))
-        sign_in(user)
-        visit campaign_url(campaign)
+describe 'Creating a new calendar event.' do
+  it 'Goes to new event page' do
+    user = User.create!(user_attributes)
+    campaign = Campaign.create!(campaign_attributes(user: user))
+    sign_in(user)
+    visit campaign_url(campaign)
 
-        click_button 'New Event'
+    click_button 'New Event'
 
-        expect(page).to have_text("Title")
-        expect(page).to have_text("Description")
-        expect(page).to have_text("Start time")
-        expect(page).to have_text("Cancel")
-        expect(page).to have_button("Create Meeting")
+    expect(page).to have_text('Title')
+    expect(page).to have_text('Description')
+    expect(page).to have_text('Start time')
+    expect(page).to have_text('Cancel')
+    expect(page).to have_button('Create Meeting')
+  end
 
-    end
+  it 'Saves new event' do
+    user = User.create!(user_attributes)
+    campaign = Campaign.create!(campaign_attributes(user: user))
+    sign_in(user)
+    visit campaign_url(campaign)
 
-    it 'Saves new event' do
-        user = User.create!(user_attributes)
-        campaign = Campaign.create!(campaign_attributes(user: user))
-        sign_in(user)
-        visit campaign_url(campaign)
+    click_button 'New Event'
 
-        click_button 'New Event'
+    fill_in 'Title', with: 'Rspec'
+    fill_in 'Description', with: 'Testing'
 
-        fill_in "Title", with: "Rspec"
-        fill_in "Description", with: "Testing"
+    click_button 'Create Meeting'
+    meeting = Meeting.last
+    expect(page).to have_current_path(meetings_path)
 
-        click_button 'Create Meeting'
-        meeting = Meeting.last
-        expect(current_path).to eq(meetings_path)
+    visit meeting_path(meeting)
+    expect(page).to have_text(meeting.title)
+    expect(page).to have_text(meeting.description)
+    expect(page).to have_text('2019')
+  end
 
-        visit meeting_path(meeting)
-        expect(page).to have_text(meeting.title)
-        expect(page).to have_text(meeting.description)
-        expect(page).to have_text("2019")
+  it "does not save the event if it's invalid" do
+    user = User.create!(user_attributes)
+    campaign = Campaign.create!(campaign_attributes(user: user))
+    sign_in(user)
+    visit campaign_url(campaign)
 
-    end
+    click_button 'New Event'
 
-    it "does not save the event if it's invalid" do
-        user = User.create!(user_attributes)
-        campaign = Campaign.create!(campaign_attributes(user: user))
-        sign_in(user)
-        visit campaign_url(campaign)
+    fill_in 'Title', with: ''
+    fill_in 'Description', with: 'Testing'
 
-        click_button 'New Event'
+    click_button 'Create Meeting'
 
-        fill_in "Title", with: ""
-        fill_in "Description", with: "Testing"
+    expect do
+      click_button 'Create Meeting'
+    end.not_to change(Meeting, :count)
 
-        click_button 'Create Meeting'
-
-        expect { 
-          click_button 'Create Meeting' 
-        }.not_to change(Meeting, :count)
- 
-        expect(current_path).to eq(meetings_path)
-        expect(page).to have_text("Title can't be blank")
-    end
-
-
+    expect(page).to have_current_path(meetings_path)
+    expect(page).to have_text("Title can't be blank")
+  end
 end
